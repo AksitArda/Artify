@@ -1,6 +1,6 @@
-# artify
+# Artify
 
-A new Flutter project.
+Modern Art Gallery - Beautify Your Phone.
 
 ## Getting Started
 
