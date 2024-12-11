@@ -127,7 +127,7 @@ class _MainState extends State<Main> {
           });
           _pageController.animateToPage(
             index,
-            duration: Duration(milliseconds: 200),
+            duration: Duration(milliseconds: 200), //Sayfalar arası geçiş hızı
             curve: Curves.easeInOut,
           );
         },
