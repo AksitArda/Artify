@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
   final List<String> popularImages = [
+    'https://pbs.twimg.com/media/FwbKDFfWIAE4dl3?format=jpg&name=large',
     'https://images.unsplash.com/photo-1731432247084-926d73272e63?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     'https://images.unsplash.com/photo-1733592688551-5ba7804a9634?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     'https://images.unsplash.com/photo-1711560217827-dbcb4de4e35d?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
