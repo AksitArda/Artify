@@ -7,13 +7,10 @@ class Favorites extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> newImages = [
-      'https://via.placeholder.com/200x400?text=Cat',
-      'https://via.placeholder.com/200x400?text=Church',
-      'https://via.placeholder.com/200x400?text=Church',
-      'https://via.placeholder.com/200x400?text=Church',
-      'https://via.placeholder.com/200x400?text=Church',
-      'https://via.placeholder.com/200x400?text=Church',
-      'https://via.placeholder.com/200x400?text=Church',
+      'https://images.unsplash.com/photo-1571513151379-9612cf354937?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1733592688551-5ba7804a9634?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1732200584655-3511db5c24e2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1487260211189-670c54da558d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     ];
 
     return SingleChildScrollView(child: Padding(
