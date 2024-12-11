@@ -27,13 +27,13 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Popular Section
-            Text(
+            Row(children: [Text(
               'Popular',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
-            ),
+            ),SizedBox(width: 4,),Icon(Icons.star, color:Colors.deepPurple,),],),
             SizedBox(height: 10),
             SizedBox(
               height: 300,
@@ -57,13 +57,13 @@ class Home extends StatelessWidget {
             ),
             SizedBox(height: 20),
             // New Section
-            Text(
+            Row(children: [Text(
               'New',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
-            ),
+            ),SizedBox(width: 4,),Icon(Icons.photo, color:Colors.deepPurple,),],),
             SizedBox(height: 10),
             GridView.builder(
               shrinkWrap: true,

@@ -19,20 +19,20 @@ class Favorites extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Popular Section
-          Text(
+          Row(children: [Text(
             'Favorites',
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.bold),
-          ),
+          ),SizedBox(width: 4,),Icon(Icons.favorite, color:Colors.deepPurple,),],),
           SizedBox(height: 10),
           GridView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount: newImages.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+              crossAxisCount: 3,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
             ),

@@ -34,24 +34,60 @@ class _MainState extends State<Main> {
         backgroundColor: Color.fromARGB(255, 36, 36, 36),
         elevation: 0,
         title: Center(
-            child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.palette_outlined,
-              color: Colors.deepPurpleAccent,
-              size: 40,
-            ),
-            Text(
-              'Artify',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 35),
-            )
-          ],
-        )),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.palette_outlined,
+                    color: Colors.deepPurpleAccent,
+                    size: 35,
+                  ),
+                  Text(
+                    'Artify',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  /*Text(
+                    'Modern Art Gallery  ',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 16),
+                  ),*/
+                  /*Icon(
+                    Icons.yard_outlined,
+                    color: Colors.deepPurple,
+                    size: 20, // Belki Kullanırız.
+                  ),*/
+                  Text(
+                    'Modern Art Gallery, Beautify Your Phone',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 16),
+                  ),
+                  /*Icon(
+                    Icons.phone_iphone_rounded,
+                    color: Colors.deepPurple,
+                    size: 20,
+                  ),*/ // Belki Kullanırız.
+                ],
+              )
+            ],
+          ),
+        ),
       ),
       body: PageView(
         controller: _pageController,
