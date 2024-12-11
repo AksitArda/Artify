@@ -1,5 +1,6 @@
 import 'package:artify/favorites.dart';
 import 'package:artify/home.dart';
+import 'package:artify/search.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,10 +33,25 @@ class _MainState extends State<Main> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 36, 36, 36),
         elevation: 0,
-        title: Center(child: Text(
-          'Artify',
-          style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold, fontSize: 35),
-        ),),
+        title: Center(
+            child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.palette_outlined,
+              color: Colors.deepPurpleAccent,
+              size: 40,
+            ),
+            Text(
+              'Artify',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 35),
+            )
+          ],
+        )),
       ),
       body: PageView(
         controller: _pageController,
@@ -46,14 +62,14 @@ class _MainState extends State<Main> {
         },
         children: [
           Home(),
-          Center(child: Text("Search Page")),
+          Search(),
           Favorites(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         backgroundColor: Colors.black12,
-        selectedItemColor: Colors.white,
+        selectedItemColor: Colors.deepPurpleAccent,
         unselectedItemColor: Colors.grey,
         items: [
           BottomNavigationBarItem(
