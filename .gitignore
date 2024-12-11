@@ -154,3 +154,5 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
 /.dart_tool/flutter_build
+/.dart_tool
+/build
