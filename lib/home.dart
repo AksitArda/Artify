@@ -66,7 +66,7 @@ class Home extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),SizedBox(width: 4,),Icon(Icons.photo, color:Colors.deepPurple,),],),
             SizedBox(height: 10),
-            GridView.builder(
+            GridView.builder( //newImages listesinde ki resim url'lerini gird e ekler
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: newImages.length,
