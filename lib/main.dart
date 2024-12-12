@@ -1,6 +1,7 @@
-import 'package:artify/favorites.dart';
+ import 'package:artify/favorites.dart';
 import 'package:artify/home.dart';
 import 'package:artify/search.dart';
+import 'package:artify/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Main(),
+      home: SplashScreen(),
     );
   }
 }

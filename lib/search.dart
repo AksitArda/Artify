@@ -5,7 +5,7 @@ class Search extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> history = ['Red Car', 'Space', 'Galaxy', 'Phone'];
+    final List<String> history = ['Red Car', 'Space', 'Galaxy', 'Phone','Keyvan Aresteh'];
 
     return Padding(
       padding: EdgeInsets.only(left: 20, right: 20),
