@@ -15,32 +15,33 @@ class Favorites extends StatelessWidget {
     ];
 
     return SingleChildScrollView(child: Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(15.0), //Ekran kenarından yan boşlukları ayarlama
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Popular Section
-          Row(children: [Text(
+          Row(children: [Text(  //Favori Başlık kodu Row=Yatay Sıralama
             'Favorites',
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.bold),
-          ),SizedBox(width: 4,),Icon(Icons.favorite, color:Colors.deepPurple,),],),
+          ),SizedBox(width: 4,), //Favorite ile ikon arasındaki boşluk
+            Icon(Icons.favorite, color:Colors.deepPurple,),],),
           SizedBox(height: 10),
           GridView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: newImages.length,
+            physics: NeverScrollableScrollPhysics(), //Izgaranın Kaydırılması
+            itemCount: newImages.length, //kaç item olacağı
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
+              crossAxisCount: 3, // Ekrana yan yana kaç adet fotoğraf sığdırma
+              crossAxisSpacing: 10, //fotoğraflar arası yan boşluk
+              mainAxisSpacing: 10, //fotoğraflar arası alt boşluk
             ),
             itemBuilder: (context, index) {
-              return Container(
+              return Container( //kutu widgeti
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20), //kenar yumuşatma
                   image: DecorationImage(
                     image: NetworkImage(newImages[index]),
                     fit: BoxFit.cover,
