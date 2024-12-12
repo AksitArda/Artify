@@ -39,15 +39,20 @@ class Favorites extends StatelessWidget {
               mainAxisSpacing: 10, //fotoğraflar arası alt boşluk
             ),
             itemBuilder: (context, index) {
-              return Container( //kutu widgeti
+              return Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20), //kenar yumuşatma
-                  image: DecorationImage(
-                    image: NetworkImage(newImages[index]),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/placeholder.png', // Yüklenme sırasında gösterilecek resim
+                    image: newImages[index], // Resim URL'si
                     fit: BoxFit.cover,
                   ),
                 ),
               );
+
             },
           ),
         ],

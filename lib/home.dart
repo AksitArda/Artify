@@ -47,8 +47,12 @@ class Home extends StatelessWidget {
                     width: 200,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                        image: NetworkImage(popularImages[index]),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: FadeInImage.assetNetwork(
+                        placeholder: 'assets/placeholder.png', // Yüklenme sırasında gösterilecek resim
+                        image: popularImages[index], // Resim URL'si
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -77,10 +81,16 @@ class Home extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 return Container(
+                  margin: EdgeInsets.only(right: 10),
+                  width: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                      image: NetworkImage(newImages[index]),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/placeholder.png', // Yüklenme sırasında gösterilecek resim
+                      image: newImages[index], // Resim URL'si
                       fit: BoxFit.cover,
                     ),
                   ),
