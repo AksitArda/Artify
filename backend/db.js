@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const conn = async () => {
   await mongoose
     .connect(process.env.MONGODB_URI, {
-      dbName: "blog",
+      dbName: "artify",
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

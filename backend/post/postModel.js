@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  content: { type: Object, required: true },
-  tags: { type: [String], validate: (v) => Array.isArray(v) && v.length > 0 },
-  public: { type: Boolean, require: true },
+  imageTitle: { type: String, required: true },
+  imageSlug: { type: String, required: true },
+  imageDesc: { type: String, require: true },
+  userName: { type: String, require: true },
 });
 
-const Data = mongoose.model("posts", PostSchema);
+const Data = mongoose.model("photos", PostSchema);
 
 module.exports = Data;

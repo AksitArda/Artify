@@ -1,3 +1,4 @@
+import 'package:artify/login.dart';
 import 'package:artify/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -165,6 +166,30 @@ class _SplashScreenState extends State<Register> with SingleTickerProviderStateM
                       SizedBox(
                         height: 50,
                       ),
+                      FadeInUp(
+                          duration: Duration(milliseconds: 1500),
+                          child: Text(
+                            "Zaten hesabın var mı?",
+                            style: TextStyle(color: Colors.grey),
+                          )),
+                      FadeInUp(
+                          duration: Duration(milliseconds: 1500),
+                          child: MaterialButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => Login()),
+                              );
+                            },
+                            child: Center(
+                              child: Text(
+                                "Giriş Yap",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          )),
                     ],
                   ),
                 ),

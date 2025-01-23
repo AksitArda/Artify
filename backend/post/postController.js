@@ -1,21 +1,5 @@
 const Data = require("./postModel");
 
-const addData = async (req, res) => {
-  try {
-    const newData = new Data({
-      title: req.body.title,
-      content: req.body.content,
-      tags: req.body.tags,
-      public: req.body.public,
-    });
-
-    const savedData = await newData.save();
-    res.json(savedData);
-  } catch (err) {
-    res.status(400).json("Error: " + err.message);
-  }
-};
-
 const getAllData = async (req, res) => {
   try {
     if (req.query.limit < 15) {
@@ -52,7 +36,6 @@ const getPost = async (req, res) => {
 };
 
 module.exports = {
-  addData,
   getAllData,
   getPost,
 };

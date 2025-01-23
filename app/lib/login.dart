@@ -168,12 +168,9 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                       FadeInUp(
                           duration: Duration(milliseconds: 1500),
                           child: Text(
-                            "Hesabın mı yok? Hemen hesap oluştur.",
+                            "Hesabın mı yok? Hemen ",
                             style: TextStyle(color: Colors.grey),
                           )),
-                      SizedBox(
-                        height: 40,
-                      ),
                       FadeInUp(
                           duration: Duration(milliseconds: 1500),
                           child: MaterialButton(
@@ -183,11 +180,6 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                                 MaterialPageRoute(builder: (context) => Register()),
                               );
                             },
-                            height: 50,
-                            color: Colors.deepPurpleAccent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
                             child: Center(
                               child: Text(
                                 "Hesap Oluştur",
@@ -197,6 +189,9 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                               ),
                             ),
                           )),
+                      SizedBox(
+                        height: 40,
+                      ),
                       SizedBox(
                         height: 40,
                       ),
