@@ -1,27 +1,20 @@
-import 'package:artify/login.dart';
+import 'package:artify/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<Login> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    
-    Future.delayed(Duration(seconds: 2),(){
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Login()), // Replace MyNextScreen with your actual screen widget
-      );
-    });
   }
 
   void disponse() {
@@ -44,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               size: 35,
             ),
             Text(
-              'Artify',
+              'Artify Login Screen',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
