@@ -31,9 +31,8 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-              Colors.purple.shade900,
-              Colors.purple.shade800,
-              Colors.purple.shade400
+              Color.fromARGB(255, 36, 36, 36),
+              Colors.deepPurpleAccent,
             ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,17 +47,26 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                 children: <Widget>[
                   FadeInUp(
                       duration: Duration(milliseconds: 1000),
-                      child: Text(
-                        "Login",
-                        style: TextStyle(color: Colors.white, fontSize: 40),
-                      )),
+                      child: Row(
+                        children: [
+                        Icon(
+                          Icons.palette_outlined,
+                          color: Colors.deepPurpleAccent,
+                          size: 35,
+                        ),
+                          Text(
+                            "Artify",
+                            style: TextStyle(color: Colors.white, fontSize: 40),
+                          )
+            ]),
+                      ),
                   SizedBox(
                     height: 10,
                   ),
                   FadeInUp(
                       duration: Duration(milliseconds: 1300),
                       child: Text(
-                        "Welcome Back",
+                        "Hoşgeldiniz. Lütfen Giriş Yapınız.",
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       )),
                 ],
@@ -68,7 +76,7 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 36, 36, 36),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
@@ -83,11 +91,11 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                           duration: Duration(milliseconds: 1400),
                           child: Container(
                             decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Color.fromARGB(255, 36, 36, 36),
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Color.fromRGBO(225, 95, 27, .3),
+                                      color: Color.fromARGB(255, 36, 36, 36),
                                       blurRadius: 20,
                                       offset: Offset(0, 10))
                                 ]),
@@ -98,12 +106,13 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                                   decoration: BoxDecoration(
                                       border: Border(
                                           bottom: BorderSide(
-                                              color: Colors.grey.shade200))),
+                                              color: Colors.white))),
                                   child: TextField(
+                                    style: TextStyle(color: Colors.white),
                                     decoration: InputDecoration(
                                         hintText: "Kullanıcı Adı",
                                         hintStyle:
-                                        TextStyle(color: Colors.grey),
+                                        TextStyle(color: Colors.white),
                                         border: InputBorder.none),
                                   ),
                                 ),
@@ -112,13 +121,14 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                                   decoration: BoxDecoration(
                                       border: Border(
                                           bottom: BorderSide(
-                                              color: Colors.grey.shade200))),
+                                              color: Colors.white))),
                                   child: TextField(
                                     obscureText: true,
+                                    style: TextStyle(color: Colors.white),
                                     decoration: InputDecoration(
                                         hintText: "Şifre",
                                         hintStyle:
-                                        TextStyle(color: Colors.grey),
+                                        TextStyle(color: Colors.white),
                                         border: InputBorder.none),
                                   ),
                                 ),
@@ -132,7 +142,7 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                           duration: Duration(milliseconds: 1500),
                           child: Text(
                             "Şifreni mi unuttun ?",
-                            style: TextStyle(color: Colors.grey),
+                            style: TextStyle(color: Colors.white),
                           )),
                       SizedBox(
                         height: 40,
@@ -140,15 +150,20 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                       FadeInUp(
                           duration: Duration(milliseconds: 1600),
                           child: MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+    Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => Main()), // Replace MyNextScreen with your actual screen widget
+    );
+                            },
                             height: 50,
-                            color: Colors.orange[900],
+                            color: Colors.deepPurpleAccent,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
                             child: Center(
                               child: Text(
-                                "Login",
+                                "Giriş Yap",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
@@ -158,62 +173,7 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                       SizedBox(
                         height: 50,
                       ),
-                      FadeInUp(
-                          duration: Duration(milliseconds: 1700),
-                          child: Text(
-                            "Continue with social media",
-                            style: TextStyle(color: Colors.grey),
-                          )),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: FadeInUp(
-                                duration: Duration(milliseconds: 1800),
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  height: 50,
-                                  color: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "Facebook",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                )),
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Expanded(
-                            child: FadeInUp(
-                                duration: Duration(milliseconds: 1900),
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  height: 50,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                  color: Colors.black,
-                                  child: Center(
-                                    child: Text(
-                                      "Github",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                )),
-                          )
-                        ],
-                      )
+
                     ],
                   ),
                 ),
