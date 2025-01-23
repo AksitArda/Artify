@@ -22,8 +22,8 @@ const getAllData = async (req, res) => {
 
 const getPost = async (req, res) => {
   try {
-    const postId = req.params.id;
-    const post = await Data.findById(postId);
+    const postSlug = req.params.slug;
+    const post = await Data.findOne({ imageSlug: postSlug });
 
     if (!post) {
       return res.status(404).send("Error: Post not found");

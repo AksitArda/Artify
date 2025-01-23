@@ -1,3 +1,4 @@
+import 'package:artify/photo.dart';
 import 'package:flutter/material.dart';
 import 'getImages.dart';
 
@@ -117,7 +118,14 @@ class _HomeState extends State<Home> {
                       mainAxisSpacing: 10,
                     ),
                     itemBuilder: (context, index) {
-                      return Container(
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => Photo(photoId: newImages[index],)),
+                          );
+                        },
+                        child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -129,7 +137,7 @@ class _HomeState extends State<Home> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                      );
+                      ),);
                     },
                   );
                 } else {
