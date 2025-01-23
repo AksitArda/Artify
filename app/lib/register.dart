@@ -1,17 +1,16 @@
 import 'package:artify/main.dart';
-import 'package:artify/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:animate_do/animate_do.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _SplashScreenState();
+  State<Register> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<Register> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
@@ -47,20 +46,20 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   FadeInUp(
-                      duration: Duration(milliseconds: 1000),
-                      child: Row(
+                    duration: Duration(milliseconds: 1000),
+                    child: Row(
                         children: [
-                        Icon(
-                          Icons.palette_outlined,
-                          color: Colors.deepPurpleAccent,
-                          size: 50,
-                        ),
+                          Icon(
+                            Icons.palette_outlined,
+                            color: Colors.deepPurpleAccent,
+                            size: 50,
+                          ),
                           Text(
                             "Artify",
                             style: TextStyle(color: Colors.white, fontSize: 50),
                           )
-            ]),
-                      ),
+                        ]),
+                  ),
                   SizedBox(
                     height: 40,
                   ),
@@ -111,7 +110,7 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                                   child: TextField(
                                     style: TextStyle(color: Colors.white),
                                     decoration: InputDecoration(
-                                        hintText: "Kullanıcı Adı",
+                                        hintText: "Kullanıcı Adı Gir",
                                         hintStyle:
                                         TextStyle(color: Colors.white),
                                         border: InputBorder.none),
@@ -127,7 +126,7 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                                     obscureText: true,
                                     style: TextStyle(color: Colors.white),
                                     decoration: InputDecoration(
-                                        hintText: "Şifre",
+                                        hintText: "Şifre Gir",
                                         hintStyle:
                                         TextStyle(color: Colors.white),
                                         border: InputBorder.none),
@@ -139,13 +138,14 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                       SizedBox(
                         height: 40,
                       ),
+
                       FadeInUp(
                           duration: Duration(milliseconds: 1600),
                           child: MaterialButton(
                             onPressed: () {
                               Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) => Main()),
+                                context,
+                                MaterialPageRoute(builder: (context) => Main()),
                               );
                             },
                             height: 50,
@@ -155,7 +155,7 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                             ),
                             child: Center(
                               child: Text(
-                                "Giriş Yap",
+                                "Kayıt Ol",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
@@ -164,41 +164,6 @@ class _SplashScreenState extends State<Login> with SingleTickerProviderStateMixi
                           )),
                       SizedBox(
                         height: 50,
-                      ),
-                      FadeInUp(
-                          duration: Duration(milliseconds: 1500),
-                          child: Text(
-                            "Hesabın mı yok? Hemen hesap oluştur.",
-                            style: TextStyle(color: Colors.grey),
-                          )),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      FadeInUp(
-                          duration: Duration(milliseconds: 1500),
-                          child: MaterialButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => Register()),
-                              );
-                            },
-                            height: 50,
-                            color: Colors.deepPurpleAccent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Hesap Oluştur",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          )),
-                      SizedBox(
-                        height: 40,
                       ),
                     ],
                   ),
