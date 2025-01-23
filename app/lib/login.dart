@@ -1,7 +1,7 @@
 import 'package:artify/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:animate_do/animate_do.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
