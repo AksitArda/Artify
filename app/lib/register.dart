@@ -12,6 +12,7 @@ class Register extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<Register> with SingleTickerProviderStateMixin {
+  bool _isPasswordHidden = true;
 
   @override
   void initState() {
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<Register> with SingleTickerProviderStateM
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   }
 
-  void disponse() {
+  void dispose() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
     super.dispose();
   }
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<Register> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 36, 36, 36),
-      body:  Container(
+      body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
@@ -48,18 +49,17 @@ class _SplashScreenState extends State<Register> with SingleTickerProviderStateM
                 children: <Widget>[
                   FadeInUp(
                     duration: Duration(milliseconds: 1000),
-                    child: Row(
-                        children: [
-                          Icon(
-                            Icons.palette_outlined,
-                            color: Colors.deepPurpleAccent,
-                            size: 50,
-                          ),
-                          Text(
-                            "Artify",
-                            style: TextStyle(color: Colors.white, fontSize: 50),
-                          )
-                        ]),
+                    child: Row(children: [
+                      Icon(
+                        Icons.palette_outlined,
+                        color: Colors.deepPurpleAccent,
+                        size: 50,
+                      ),
+                      Text(
+                        "Artify",
+                        style: TextStyle(color: Colors.white, fontSize: 50),
+                      )
+                    ]),
                   ),
                   SizedBox(
                     height: 40,
@@ -124,13 +124,26 @@ class _SplashScreenState extends State<Register> with SingleTickerProviderStateM
                                           bottom: BorderSide(
                                               color: Colors.white))),
                                   child: TextField(
-                                    obscureText: true,
+                                    obscureText: _isPasswordHidden,
                                     style: TextStyle(color: Colors.white),
                                     decoration: InputDecoration(
-                                        hintText: "Şifre Gir",
-                                        hintStyle:
-                                        TextStyle(color: Colors.white),
-                                        border: InputBorder.none),
+                                      hintText: "Şifre Gir",
+                                      hintStyle: TextStyle(color: Colors.white),
+                                      border: InputBorder.none,
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          _isPasswordHidden
+                                              ? Icons.visibility_off
+                                              : Icons.visibility,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            _isPasswordHidden = !_isPasswordHidden;
+                                          });
+                                        },
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -139,7 +152,6 @@ class _SplashScreenState extends State<Register> with SingleTickerProviderStateM
                       SizedBox(
                         height: 40,
                       ),
-
                       FadeInUp(
                           duration: Duration(milliseconds: 1600),
                           child: MaterialButton(
