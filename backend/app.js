@@ -10,8 +10,9 @@ const app = express();
 app.use(express.static("./uploads"));
 
 app.use(bodyParser.json());
+
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3001"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
   res.header(

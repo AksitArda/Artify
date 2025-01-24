@@ -3,6 +3,6 @@ const router = express.Router();
 const dataController = require("./postController");
 
 router.get("/images", dataController.getAllData);
-router.get("/image/:id", dataController.getPost);
+router.get("/image/:slug", dataController.getPost);
 
 module.exports = router;
