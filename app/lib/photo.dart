@@ -43,7 +43,7 @@ class _PhotoState extends State<Photo> {
         // Başarılı istek
         final data = json.decode(response.body);
         setState(() {
-          imageUrl = "http://192.168.1.81:3000/" + data['imageSlug'];
+          imageUrl = "http://2.58.85.87:4001/" + data['imageSlug'];
           imageTitle = data['imageTitle'];
           imageDesc = data['imageDesc'];
           userName = data['userName'];
