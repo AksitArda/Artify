@@ -73,7 +73,7 @@ class _MainState extends State<Main> {
                     size: 20, // Belki Kullanırız.
                   ),*/
                   Text(
-                    'Modern Sanat Galerisi, Telefonunuzu Güzelleştirin',
+                    'Modern Sanat Galerisi, Telefonunuzu Güzelleştirin.',
                     style: TextStyle(
                         color: Colors.white,
                         fontStyle: FontStyle.italic,
