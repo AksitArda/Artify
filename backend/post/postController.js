@@ -78,7 +78,7 @@ const loginUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
-    const user = await User.findOne({ userName: req.params.userName });
+    const user = await User.findOne({ userToken: req.body.userToken });
     if (!user) return res.status(404).json({ message: "User not found" });
     res.json(user);
   } catch (error) {

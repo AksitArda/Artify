@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Search extends StatefulWidget {
   @override
@@ -10,7 +12,6 @@ class Search extends StatefulWidget {
 
 class _ImageUploadPageState extends State<Search> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _imageTitleController = TextEditingController();
   final TextEditingController _imageDescController = TextEditingController();
   File? _image;
@@ -31,7 +32,9 @@ class _ImageUploadPageState extends State<Search> {
     final uri = Uri.parse("http://2.58.85.87:4001//uploadImage");
     var request = http.MultipartRequest('POST', uri);
 
-    request.fields['userName'] = _usernameController.text;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    request.fields['userName'] = prefs.getString("username").toString();
     request.fields['imageTitle'] = _imageTitleController.text;
     request.fields['imageDesc'] = _imageDescController.text;
 
@@ -60,16 +63,6 @@ class _ImageUploadPageState extends State<Search> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextFormField(
-                controller: _usernameController,
-                decoration: InputDecoration(labelText: 'Kullanıcı Adı'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Lütfen bir kullanıcı adı girin';
-                  }
-                  return null;
-                },
-              ),
               TextFormField(
                 controller: _imageTitleController,
                 decoration: InputDecoration(labelText: 'Resim Başlığı'),

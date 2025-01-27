@@ -3,6 +3,9 @@ import 'package:artify/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -12,7 +15,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool _isPasswordVisible = false; // Şifrenin görünürlük durumu
+  bool _isPasswordVisible = false;
+  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -23,7 +28,50 @@ class _LoginState extends State<Login> {
   @override
   void dispose() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    _userNameController.dispose();
+    _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> loginUser() async {
+    final String userName = _userNameController.text.trim();
+    final String password = _passwordController.text.trim();
+
+    if (userName.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Kullanıcı adı ve şifre boş olamaz")),
+      );
+      return;
+    }
+
+    final response = await http.post(
+      Uri.parse('http://2.58.85.87:4001/login'),
+      body: json.encode({
+        'userName': userName,
+        'userPassword': password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      final String token = responseData['userToken'];
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('authToken', token);
+      await prefs.setString('username', _userNameController.text);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Giriş başarılı!")),
+      );
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Main()));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Giriş başarısız! Lütfen tekrar deneyin.")),
+      );
+    }
   }
 
   @override
@@ -115,9 +163,10 @@ class _LoginState extends State<Login> {
                                     bottom: BorderSide(color: Colors.white),
                                   ),
                                 ),
-                                child: const TextField(
-                                  style: TextStyle(color: Colors.white),
-                                  decoration: InputDecoration(
+                                child: TextField(
+                                  controller: _userNameController,
+                                  style: const TextStyle(color: Colors.white),
+                                  decoration: const InputDecoration(
                                     hintText: "Kullanıcı Adı",
                                     hintStyle: TextStyle(color: Colors.white),
                                     border: InputBorder.none,
@@ -132,6 +181,7 @@ class _LoginState extends State<Login> {
                                   ),
                                 ),
                                 child: TextField(
+                                  controller: _passwordController,
                                   obscureText: !_isPasswordVisible,
                                   style: const TextStyle(color: Colors.white),
                                   decoration: InputDecoration(
@@ -162,12 +212,7 @@ class _LoginState extends State<Login> {
                       FadeInUp(
                         duration: const Duration(milliseconds: 1600),
                         child: MaterialButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) => Main()),
-                            );
-                          },
+                          onPressed: loginUser,
                           height: 50,
                           color: Colors.deepPurpleAccent,
                           shape: RoundedRectangleBorder(
