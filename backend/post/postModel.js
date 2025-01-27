@@ -9,4 +9,13 @@ const PostSchema = new mongoose.Schema({
 
 const Data = mongoose.model("photos", PostSchema);
 
-module.exports = Data;
+const UserSchema = new mongoose.Schema({
+  userName: { type: String, required: true },
+  userPassword: { type: String, required: true },
+  userToken: { type: String, require: true },
+  userFavorites: { type: [String], require: true },
+});
+
+const User = mongoose.model("users", UserSchema);
+
+module.exports = { Data, User };
