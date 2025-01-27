@@ -115,7 +115,7 @@ class _MainState extends State<Main> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.upload_file),
-            label: 'Resim Yükle',
+            label: 'Upload İmage',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
