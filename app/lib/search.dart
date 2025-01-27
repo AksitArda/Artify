@@ -29,7 +29,7 @@ class _ImageUploadPageState extends State<Search> {
   Future<void> _uploadImage() async {
     if (_image == null) return;
 
-    final uri = Uri.parse("http://2.58.85.87:4001//uploadImage");
+    final uri = Uri.parse("http://2.58.85.87:4001/uploadImage");
     var request = http.MultipartRequest('POST', uri);
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -46,7 +46,8 @@ class _ImageUploadPageState extends State<Search> {
     if (response.statusCode == 200) {
       print("Resim başarıyla yüklendi!");
     } else {
-      print("Resim yüklenirken bir hata oluştu.");
+      String responseBody = await response.stream.bytesToString();
+      print("Hata! Yanıt body: $responseBody");
     }
   }
 
