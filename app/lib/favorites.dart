@@ -1,62 +1,116 @@
-import 'package:artify/main.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Favorites extends StatelessWidget {
+class Favorites extends StatefulWidget {
   const Favorites({super.key});
 
   @override
+  _FavoritesState createState() => _FavoritesState();
+}
+
+class _FavoritesState extends State<Favorites> {
+  List<String> favoriteImages = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchFavorites();
+  }
+
+  Future<void> fetchFavorites() async {
+    final prefs = await SharedPreferences.getInstance();
+    final authToken = prefs.getString('authToken');
+
+    if (authToken == null) {
+      setState(() {
+        isLoading = false;
+      });
+      return;
+    }
+
+    final url = 'http://2.58.85.87:4001/favorites';
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+        body: json.encode({"userToken": authToken}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          favoriteImages = List<String>.from(data['favorites']);
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final List<String> newImages = [
-      'https://images.unsplash.com/photo-1571513151379-9612cf354937?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1733592688551-5ba7804a9634?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1732200584655-3511db5c24e2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1487260211189-670c54da558d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg'
-    ];
-
-    return SingleChildScrollView(child: Padding(
-      padding: const EdgeInsets.all(15.0), //Ekran kenarından yan boşlukları ayarlama
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Popular Section
-          Row(children: [Text(  //Favori Başlık kodu Row=Yatay Sıralama
-            'Favorites',
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
-          ),SizedBox(width: 4,), //Favorite ile ikon arasındaki boşluk
-            Icon(Icons.favorite, color:Colors.deepPurple,),],),
-          SizedBox(height: 10),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(), //Izgaranın Kaydırılması
-            itemCount: newImages.length, //kaç item olacağı
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, // Ekrana yan yana kaç adet fotoğraf sığdırma
-              crossAxisSpacing: 10, //fotoğraflar arası yan boşluk
-              mainAxisSpacing: 10, //fotoğraflar arası alt boşluk
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(
+                  'Favorites',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 4),
+                Icon(Icons.favorite, color: Colors.deepPurple),
+              ],
             ),
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/placeholder.png', // Yüklenme sırasında gösterilecek resim
-                    image: newImages[index], // Resim URL'si
-                    fit: BoxFit.cover,
+            SizedBox(height: 10),
+            isLoading
+                ? Center(child: CircularProgressIndicator(color: Colors.deepPurpleAccent))
+                : favoriteImages.isEmpty
+                ? Center(child: Text("Henüz favoriniz yok", style: TextStyle(color: Colors.white)))
+                : GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: favoriteImages.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemBuilder: (context, index) {
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                ),
-              );
-
-            },
-          ),
-        ],
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/placeholder.png',
+                      image: "http://2.58.85.87:4001/" + favoriteImages[index],
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
-    ),);
+    );
   }
 }

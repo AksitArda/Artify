@@ -3,6 +3,7 @@ import 'package:artify/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Photo extends StatefulWidget {
   final String photoId;
@@ -34,7 +35,6 @@ class _PhotoState extends State<Photo> {
     super.dispose();
   }
 
-  // API'den fotoğrafı getiren fonksiyon
   Future<void> fetchPhoto(String photoId) async {
     final url = 'http://2.58.85.87:4001/image/$photoId';
     try {
@@ -47,7 +47,7 @@ class _PhotoState extends State<Photo> {
           imageTitle = data['imageTitle'];
           imageDesc = data['imageDesc'];
           userName = data['userName'];
-          isFavorite = data['isFavorite'] ?? false; // Sunucu favori durumunu dönerse oku
+          isFavorite = data['isFavorite'] ?? false;
           isLoading = false;
         });
       } else {
@@ -65,10 +65,12 @@ class _PhotoState extends State<Photo> {
   }
 
   Future<void> toggleFavorite() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
     final url = 'http://2.58.85.87:4001/favorites/toggle';
     final body = jsonEncode({
       "photoId": widget.photoId,
-      "userToken": "kullanici_tokeni" // Kullanıcı token'ı buraya gelecek
+      "userToken": prefs.getString("authToken").toString()
     });
 
     try {
@@ -151,8 +153,6 @@ class _PhotoState extends State<Photo> {
               style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 16),
             ),
             SizedBox(height: 20),
-
-            // Kalp Butonu
             IconButton(
               icon: Icon(
                 isFavorite ? Icons.favorite : Icons.favorite_border,
