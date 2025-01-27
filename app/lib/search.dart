@@ -53,58 +53,80 @@ class _ImageUploadPageState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Resim Yükleme Sayfası"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                controller: _imageTitleController,
-                decoration: InputDecoration(labelText: 'Resim Başlığı'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Lütfen bir başlık girin';
-                  }
-                  return null;
-                },
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 20),
+            TextFormField(
+              controller: _imageTitleController,
+              decoration: InputDecoration(labelText: 'Resim Başlığı'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Lütfen bir başlık girin';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: _imageDescController,
+              decoration: InputDecoration(labelText: 'Resim Açıklaması'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Lütfen bir açıklama girin';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 20),
+            MaterialButton(
+              onPressed: _pickImage,
+              height: 50,
+              color: Colors.deepPurpleAccent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
               ),
-              TextFormField(
-                controller: _imageDescController,
-                decoration: InputDecoration(labelText: 'Resim Açıklaması'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Lütfen bir açıklama girin';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _pickImage,
-                child: Text('Resim Seç'),
-              ),
-              if (_image != null)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Image.file(_image!),
+              child: const Center(
+                child: Text(
+                  "Resim Seç",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _uploadImage();
-                  }
-                },
-                child: Text('Resmi Yükle'),
               ),
-            ],
-          ),
+            ),
+            if (_image != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Image.file(_image!),
+              ),
+            SizedBox(height: 20),
+            MaterialButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _uploadImage();
+                }
+              },
+              height: 50,
+              color: Colors.deepPurpleAccent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: const Center(
+                child: Text(
+                  "Resimi Yükle",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

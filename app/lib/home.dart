@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
 
   Future<void> _refresh() async {
     setState(() {
-      futureImages = fetchImages(); // API'den verileri tekrar çek
+      futureImages = fetchImages();
     });
   }
 
