@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:artify/login.dart';
-import 'package:artify/main.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -54,12 +53,14 @@ class _RegisterState extends State<Register> {
       }),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Kayıt başarılı!")),
       );
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
     } else {
+      print(response.body);
+      
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Tekrar Deneyin")),
       );

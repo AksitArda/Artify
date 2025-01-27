@@ -19,6 +19,7 @@ class _PhotoState extends State<Photo> {
   String userName = "";
   String errorMessage = "";
   bool isLoading = true;
+  bool isFavorite = false;
 
   @override
   void initState() {
@@ -40,13 +41,13 @@ class _PhotoState extends State<Photo> {
       final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
-        // Başarılı istek
         final data = json.decode(response.body);
         setState(() {
           imageUrl = "http://2.58.85.87:4001/" + data['imageSlug'];
           imageTitle = data['imageTitle'];
           imageDesc = data['imageDesc'];
           userName = data['userName'];
+          isFavorite = data['isFavorite'] ?? false; // Sunucu favori durumunu dönerse oku
           isLoading = false;
         });
       } else {
@@ -60,6 +61,33 @@ class _PhotoState extends State<Photo> {
         errorMessage = "Error: ${e.toString()}";
         isLoading = false;
       });
+    }
+  }
+
+  Future<void> toggleFavorite() async {
+    final url = 'http://2.58.85.87:4001/favorites/toggle';
+    final body = jsonEncode({
+      "photoId": widget.photoId,
+      "userToken": "kullanici_tokeni" // Kullanıcı token'ı buraya gelecek
+    });
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          isFavorite = data['isFavorite'];
+        });
+      } else {
+        print("Error: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error: ${e.toString()}");
     }
   }
 
@@ -121,6 +149,17 @@ class _PhotoState extends State<Photo> {
             Text(
               "Gönderen: $userName",
               style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 16),
+            ),
+            SizedBox(height: 20),
+
+            // Kalp Butonu
+            IconButton(
+              icon: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: isFavorite ? Colors.red : Colors.white,
+                size: 32,
+              ),
+              onPressed: toggleFavorite,
             ),
           ],
         ),

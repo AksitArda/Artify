@@ -76,26 +76,26 @@ const loginUser = async (req, res) => {
   }
 };
 
-const getUser = async (req, res) => {
-  try {
-    const user = await User.findOne({ userToken: req.body.userToken });
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 const updateFavorites = async (req, res) => {
   try {
-    const { userFavorites } = req.body;
-    const user = await User.findOneAndUpdate(
-      { userName: req.params.userName },
-      { userFavorites },
-      { new: true }
-    );
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.json({ message: "Favorites updated", user });
+    const { userToken, photoId } = req.body;
+
+    const user = await User.findOne({ userToken });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const index = user.userFavorites.indexOf(photoId);
+    if (index !== -1) {
+      user.userFavorites.splice(index, 1);
+      await user.save();
+      return res.json({ message: "Removed from favorites", isFavorite: false });
+    } else {
+      user.userFavorites.push(photoId);
+      await user.save();
+      return res.json({ message: "Added to favorites", isFavorite: true });
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -106,6 +106,5 @@ module.exports = {
   getPost,
   registerUser,
   loginUser,
-  getUser,
   updateFavorites,
 };
