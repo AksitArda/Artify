@@ -7,6 +7,6 @@ router.get("/image/:slug", dataController.getPost);
 
 router.post("/register", dataController.registerUser);
 router.post("/login", dataController.loginUser);
-router.put("/favorites/toggle", dataController.updateFavorites);
+router.post("/favorites/toggle", dataController.updateFavorites);
 
 module.exports = router;
