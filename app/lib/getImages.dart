@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 Future<List<Images>> fetchImages() async {
   try {
-    final response = await http.get(Uri.parse('http://192.168.1.80:3000/images'));
+    final response = await http.get(Uri.parse('http://2.58.85.87:4001/images'));
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonList = jsonDecode(response.body);

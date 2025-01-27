@@ -28,7 +28,7 @@ class _ImageUploadPageState extends State<Search> {
   Future<void> _uploadImage() async {
     if (_image == null) return;
 
-    final uri = Uri.parse("http://192.168.1.80:3000/uploadImage");
+    final uri = Uri.parse("http://2.58.85.87:4001//uploadImage");
     var request = http.MultipartRequest('POST', uri);
 
     request.fields['userName'] = _usernameController.text;
@@ -37,7 +37,7 @@ class _ImageUploadPageState extends State<Search> {
 
     var file = await http.MultipartFile.fromPath('file', _image!.path);
     request.files.add(file);
-    
+
     var response = await request.send();
 
     if (response.statusCode == 200) {

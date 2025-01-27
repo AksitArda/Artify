@@ -35,7 +35,7 @@ class _PhotoState extends State<Photo> {
 
   // API'den fotoğrafı getiren fonksiyon
   Future<void> fetchPhoto(String photoId) async {
-    final url = 'http://192.168.1.80:3000/image/$photoId';
+    final url = 'http://2.58.85.87:4001/image/$photoId';
     try {
       final response = await http.get(Uri.parse(url));
 
@@ -43,7 +43,7 @@ class _PhotoState extends State<Photo> {
         // Başarılı istek
         final data = json.decode(response.body);
         setState(() {
-          imageUrl = "http://192.168.1.80:3000/" + data['imageSlug'];
+          imageUrl = "http://192.168.1.81:3000/" + data['imageSlug'];
           imageTitle = data['imageTitle'];
           imageDesc = data['imageDesc'];
           userName = data['userName'];

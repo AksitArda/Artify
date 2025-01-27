@@ -33,4 +33,4 @@ conn();
 
 app.use("/", dataRoutes, imageRoutes);
 
-app.listen(3000, () => console.log("Server is running"));
+app.listen(4001, () => console.log("Server is running"));
