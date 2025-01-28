@@ -44,10 +44,10 @@ class _ImageUploadPageState extends State<Search> {
     var response = await request.send();
 
     if (response.statusCode == 200) {
-      print("Resim başarıyla yüklendi!");
+      print("Image uploaded successfully!");
     } else {
       String responseBody = await response.stream.bytesToString();
-      print("Hata! Yanıt body: $responseBody");
+      print("Mistake! Response body: $responseBody");
     }
   }
 
@@ -63,20 +63,20 @@ class _ImageUploadPageState extends State<Search> {
             SizedBox(height: 20),
             TextFormField(
               controller: _imageTitleController,
-              decoration: InputDecoration(labelText: 'Resim Başlığı'),
+              decoration: InputDecoration(labelText: 'Image Title'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Lütfen bir başlık girin';
+                  return 'Please enter a title';
                 }
                 return null;
               },
             ),
             TextFormField(
               controller: _imageDescController,
-              decoration: InputDecoration(labelText: 'Resim Açıklaması'),
+              decoration: InputDecoration(labelText: 'Image Description'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Lütfen bir açıklama girin';
+                  return 'Please enter a description';
                 }
                 return null;
               },
@@ -91,7 +91,7 @@ class _ImageUploadPageState extends State<Search> {
               ),
               child: const Center(
                 child: Text(
-                  "Resim Seç",
+                  "Select Image",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -118,7 +118,7 @@ class _ImageUploadPageState extends State<Search> {
               ),
               child: const Center(
                 child: Text(
-                  "Resimi Yükle",
+                  "Upload Image",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
