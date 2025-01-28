@@ -98,7 +98,7 @@ class _PhotoState extends State<Photo> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 36, 36, 36),
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(255, 36, 36, 36),
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
@@ -112,56 +112,110 @@ class _PhotoState extends State<Photo> {
       ),
       body: Center(
         child: isLoading
-            ? CircularProgressIndicator(color: Colors.deepPurpleAccent)
+            ? CircularProgressIndicator(
+          color: Colors.deepPurpleAccent,
+          strokeWidth: 4.0,
+        )
             : errorMessage.isNotEmpty
             ? Text(
           errorMessage,
           style: TextStyle(color: Colors.red, fontSize: 16),
           textAlign: TextAlign.center,
         )
-            : Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            imageUrl.isNotEmpty
-                ? Image.network(imageUrl, fit: BoxFit.cover)
-                : Text(
-              "No image available",
-              style: TextStyle(color: Colors.white),
-            ),
-            SizedBox(height: 20),
-
-            Text(
-              imageTitle,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 10),
-
-            Text(
-              imageDesc,
-              style: TextStyle(color: Colors.grey, fontSize: 16),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 10),
-
-            Text(
-              "Gönderen: $userName",
-              style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 16),
-            ),
-            SizedBox(height: 20),
-            IconButton(
-              icon: Icon(
-                isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isFavorite ? Colors.red : Colors.white,
-                size: 32,
+            : SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: imageUrl.isNotEmpty
+                      ? LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Image.network(
+                        imageUrl,
+                        fit: BoxFit.contain, // This makes the image responsive
+                        height: constraints.maxHeight * 0.6, // 60% of screen height
+                        width: constraints.maxWidth, // Full screen width
+                      );
+                    },
+                  )
+                      : Container(
+                    width: double.infinity,
+                    height: 300,
+                    color: Colors.grey[300],
+                    child: Center(
+                      child: Text(
+                        "No image available",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              onPressed: toggleFavorite,
-            ),
-          ],
+              SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  imageTitle,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  imageDesc,
+                  style: TextStyle(color: Colors.grey, fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  "Gönderen: $userName",
+                  style: TextStyle(
+                      color: Colors.deepPurpleAccent, fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: toggleFavorite,
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                  decoration: BoxDecoration(
+                    color: isFavorite ? Colors.red : Colors.grey[800],
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        isFavorite ? Icons.favorite : Icons.favorite_border,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        isFavorite ? "Favorited" : "Add to Favorites",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
