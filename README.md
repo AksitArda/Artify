@@ -1,16 +1,30 @@
-# Artify
+# Artify - Wallpaper Sharing App
 
-Modern Art Gallery - Beautify Your Phone.
+## Project Description
 
-## Getting Started
+Artify is a mobile application built with Flutter and a backend powered by Express.js.
 
-This project is a starting point for a Flutter application.
+## Technologies
 
-A few resources to get you started if this is your first Flutter project:
+- **Frontend**: Flutter (Dart)
+- **Backend**: Express.js (Node.js)
+- **Database**: MongoDB
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## API Endpoints
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| Method | URL           | Description                          |
+| ------ | ------------- | ------------------------------------ |
+| POST   | /login        | Logs in the user                     |
+| POST   | /register     | Register the user                    |
+| POST   | /favorites    | Retrieves user's favorite wallpapers |
+| GET    | /images       | Get all images                       |
+| GET    | /images/:slug | Get image                            |
+
+## Environment Variables
+
+Create a `.env` file for the backend with the following structure:
+
+```
+PORT=4001
+MONGODB_URI=your_database_url
+```
