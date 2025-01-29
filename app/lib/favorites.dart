@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:artify/photo.dart';
 
 class Favorites extends StatefulWidget {
   const Favorites({super.key});
@@ -80,34 +81,50 @@ class _FavoritesState extends State<Favorites> {
             ),
             SizedBox(height: 10),
             isLoading
-                ? Center(child: CircularProgressIndicator(color: Colors.deepPurpleAccent))
+                ? Center(
+                    child: CircularProgressIndicator(
+                        color: Colors.deepPurpleAccent))
                 : favoriteImages.isEmpty
-                ? Center(child: Text("Henüz favoriniz yok", style: TextStyle(color: Colors.white)))
-                : GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: favoriteImages.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
-              itemBuilder: (context, index) {
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: FadeInImage.assetNetwork(
-                      placeholder: 'assets/placeholder.png',
-                      image: "http://2.58.85.87:4001/" + favoriteImages[index],
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                );
-              },
-            ),
+                    ? Center(
+                        child: Text("Henüz favoriniz yok",
+                            style: TextStyle(color: Colors.white)))
+                    : GridView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: favoriteImages.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                        ),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Photo(
+                                          photoId: favoriteImages[index],
+                                        )),
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: FadeInImage.assetNetwork(
+                                  placeholder: 'assets/placeholder.png',
+                                  image: "http://2.58.85.87:4001/" +
+                                      favoriteImages[index],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
           ],
         ),
       ),

@@ -36,20 +36,49 @@ class _PhotoState extends State<Photo> {
   }
 
   Future<void> fetchPhoto(String photoId) async {
-    final url = 'http://2.58.85.87:4001/image/$photoId';
+    final prefs = await SharedPreferences.getInstance();
+    final authToken = prefs.getString('authToken');
+
     try {
-      final response = await http.get(Uri.parse(url));
+      final response = await http.get(Uri.parse('http://2.58.85.87:4001/image/$photoId'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        setState(() {
-          imageUrl = "http://2.58.85.87:4001/" + data['imageSlug'];
-          imageTitle = data['imageTitle'];
-          imageDesc = data['imageDesc'];
-          userName = data['userName'];
-          isFavorite = data['isFavorite'] ?? false;
-          isLoading = false;
-        });
+
+        final responseFavorites = await http.post(
+          Uri.parse('http://2.58.85.87:4001/favorites'),
+          headers: {"Content-Type": "application/json"},
+          body: json.encode({"userToken": authToken}),
+        );
+
+        if (responseFavorites.statusCode == 200) {
+          final favoriteData = json.decode(responseFavorites.body);
+
+          bool isInFavorites = false;
+
+          final favorites = favoriteData['favorites'];
+
+          for(var favorite in favorites){
+            if(favorite == photoId){
+              isInFavorites = true;
+              break;
+            }
+          }
+
+          setState(() {
+            imageUrl = "http://2.58.85.87:4001/" + data['imageSlug'];
+            imageTitle = data['imageTitle'];
+            imageDesc = data['imageDesc'];
+            userName = data['userName'];
+            isFavorite = isInFavorites;
+            isLoading = false;
+          });
+        } else {
+          setState(() {
+            errorMessage = "Error: Unable to fetch favorites (Code: ${responseFavorites.statusCode})";
+            isLoading = false;
+          });
+        }
       } else {
         setState(() {
           errorMessage = "Error: Unable to fetch image (Code: ${response.statusCode})";
@@ -129,31 +158,16 @@ class _PhotoState extends State<Photo> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: imageUrl.isNotEmpty
-                      ? LayoutBuilder(
-                    builder: (context, constraints) {
-                      return Image.network(
-                        imageUrl,
-                        fit: BoxFit.contain, // This makes the image responsive
-                        height: constraints.maxHeight * 0.6, // 60% of screen height
-                        width: constraints.maxWidth, // Full screen width
-                      );
-                    },
-                  )
-                      : Container(
-                    width: double.infinity,
-                    height: 300,
-                    color: Colors.grey[300],
-                    child: Center(
-                      child: Text(
-                        "No image available",
-                        style: TextStyle(color: Colors.black),
-                      ),
+                child: Container(
+                  height: 600,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child:Image.network(
+                      imageUrl,
+                      fit: BoxFit.fitHeight,
                     ),
                   ),
-                ),
+                )
               ),
               SizedBox(height: 16),
               Padding(
@@ -186,7 +200,7 @@ class _PhotoState extends State<Photo> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               GestureDetector(
                 onTap: toggleFavorite,
                 child: AnimatedContainer(
@@ -214,6 +228,7 @@ class _PhotoState extends State<Photo> {
                   ),
                 ),
               ),
+              SizedBox(height: 20),
             ],
           ),
         ),
