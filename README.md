@@ -12,13 +12,13 @@ Artify is a mobile application built with Flutter and a backend powered by Expre
 
 ## API Endpoints
 
-| Method | URL           | Description                          |
-| ------ | ------------- | ------------------------------------ |
-| POST   | /login        | Logs in the user                     |
-| POST   | /register     | Register the user                    |
-| POST   | /favorites    | Retrieves user's favorite wallpapers |
-| GET    | /images       | Get all images                       |
-| GET    | /images/:slug | Get image                            |
+| Method | URL          | Description                          |
+| ------ | ------------ | ------------------------------------ |
+| POST   | /login       | Logs in the user                     |
+| POST   | /register    | Register the user                    |
+| POST   | /favorites   | Retrieves user's favorite wallpapers |
+| GET    | /images      | Get all images                       |
+| GET    | /image/:slug | Get image                            |
 
 ## Environment Variables
 
