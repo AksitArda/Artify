@@ -78,56 +78,56 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 36, 36, 36),
-      body: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            colors: [
-              Color.fromARGB(255, 36, 36, 36),
-              Colors.deepPurpleAccent,
-            ],
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const SizedBox(height: 80),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  FadeInUp(
-                    duration: const Duration(milliseconds: 1000),
-                    child: Row(
-                      children: const [
-                        Icon(
-                          Icons.palette_outlined,
-                          color: Colors.deepPurpleAccent,
-                          size: 50,
-                        ),
-                        Text(
-                          "Artify",
-                          style: TextStyle(color: Colors.white, fontSize: 50),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 40),
-                  FadeInUp(
-                    duration: const Duration(milliseconds: 1300),
-                    child: const Text(
-                      "Modern Sanat Galerisi, Telefonunuzu Güzelleştirin.",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                  ),
-                ],
-              ),
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              colors: [
+                Color.fromARGB(255, 36, 36, 36),
+                Colors.deepPurpleAccent,
+              ],
             ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: Container(
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    FadeInUp(
+                      duration: const Duration(milliseconds: 1000),
+                      child: Row(
+                        children: const [
+                          Icon(
+                            Icons.palette_outlined,
+                            color: Colors.deepPurpleAccent,
+                            size: 50,
+                          ),
+                          Text(
+                            "Artify",
+                            style: TextStyle(color: Colors.white, fontSize: 50),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    FadeInUp(
+                      duration: const Duration(milliseconds: 1300),
+                      child: const Text(
+                        "Modern Sanat Galerisi, Telefonunuzu Güzelleştirin.",
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 36, 36, 36),
                   borderRadius: BorderRadius.only(
@@ -229,7 +229,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 20),
                       FadeInUp(
                         duration: const Duration(milliseconds: 1500),
                         child: const Text(
@@ -257,13 +257,12 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 40),
                     ],
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

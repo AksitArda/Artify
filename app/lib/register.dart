@@ -60,7 +60,7 @@ class _RegisterState extends State<Register> {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
     } else {
       print(response.body);
-      
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Tekrar Deneyin")),
       );
@@ -69,46 +69,51 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 36, 36, 36),
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-            Color.fromARGB(255, 36, 36, 36),
-            Colors.deepPurpleAccent,
-          ]),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: 80),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  FadeInUp(
-                    duration: Duration(milliseconds: 1000),
-                    child: Row(children: [
-                      Icon(Icons.palette_outlined, color: Colors.deepPurpleAccent, size: 50),
-                      Text("Artify", style: TextStyle(color: Colors.white, fontSize: 50)),
-                    ]),
-                  ),
-                  SizedBox(height: 40),
-                  FadeInUp(
-                    duration: Duration(milliseconds: 1300),
-                    child: Text(
-                      "Modern Sanat Galerisi, Telefonunuzu Güzelleştirin",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                  ),
-                ],
-              ),
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              colors: [
+                Color.fromARGB(255, 36, 36, 36),
+                Colors.deepPurpleAccent,
+              ],
             ),
-            SizedBox(height: 20),
-            Expanded(
-              child: Container(
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(height: 20),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    FadeInUp(
+                      duration: Duration(milliseconds: 1000),
+                      child: Row(children: [
+                        Icon(Icons.palette_outlined, color: Colors.deepPurpleAccent, size: 50),
+                        Text("Artify", style: TextStyle(color: Colors.white, fontSize: 50)),
+                      ]),
+                    ),
+                    SizedBox(height: screenHeight * 0.05),
+                    FadeInUp(
+                      duration: Duration(milliseconds: 1300),
+                      child: Text(
+                        "Modern Sanat Galerisi, Telefonunuzu Güzelleştirin",
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 36, 36, 36),
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60)),
@@ -117,7 +122,7 @@ class _RegisterState extends State<Register> {
                   padding: EdgeInsets.all(30),
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: 60),
+                      SizedBox(height: screenHeight * 0.08),
                       FadeInUp(
                         duration: Duration(milliseconds: 1400),
                         child: Container(
@@ -172,7 +177,7 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 20),
                       FadeInUp(
                         duration: Duration(milliseconds: 1600),
                         child: MaterialButton(
@@ -190,7 +195,7 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 50),
+                      const SizedBox(height: 20),
                       FadeInUp(
                         duration: Duration(milliseconds: 1500),
                         child: Text(
@@ -215,12 +220,13 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
