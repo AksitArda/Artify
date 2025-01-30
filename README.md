@@ -2,6 +2,9 @@
 
 ![App Gif](https://github.com/AksitArda/Artify/blob/main/Screenshots/Project.gif?raw=true)
 
+##Demo Video
+![Demo Video](https://github.com/AksitArda/Artify/blob/main/Screenshots/Demo%20Record.mp4)
+
 ## Project Description
 
 Artify is a mobile application built with Flutter and a backend powered by Express.js.
