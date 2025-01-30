@@ -1,9 +1,9 @@
 # Artify - Wallpaper Sharing App
 
-![App Gif](https://github.com/AksitArda/Artify/blob/main/Screenshots/Project.gif?raw=true)
-
 ##Demo Video
-![Demo Video](https://github.com/AksitArda/Artify/blob/main/Screenshots/Demo%20Record.mp4)
+![Demo Video](https://github.com/AksitArda/Artify/blob/main/Screenshots/Demo%20Record.mp4?raw=true)
+
+![App Gif](https://github.com/AksitArda/Artify/blob/main/Screenshots/Project.gif?raw=true)
 
 ## Project Description
 
