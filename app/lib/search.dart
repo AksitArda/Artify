@@ -53,80 +53,86 @@ class _ImageUploadPageState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 20),
-            TextFormField(
-              controller: _imageTitleController,
-              decoration: InputDecoration(labelText: 'Image Title'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a title';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _imageDescController,
-              decoration: InputDecoration(labelText: 'Image Description'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a description';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 20),
-            MaterialButton(
-              onPressed: _pickImage,
-              height: 50,
-              color: Colors.deepPurpleAccent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: const Center(
-                child: Text(
-                  "Select Image",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (_image != null)
+                Container(
+                  color: Colors.black12,
+                  width: 400,
+                  height: 500,
+                  child: Image.file(_image!,fit: BoxFit.fitHeight,),
+                ),
+              SizedBox(height: 20),
+              MaterialButton(
+                onPressed: _pickImage,
+                height: 50,
+                color: Colors.deepPurpleAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: const Center(
+                  child: Text(
+                    "Select Image",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-            if (_image != null)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Image.file(_image!),
+              SizedBox(height: 20),
+              TextFormField(
+                controller: _imageTitleController,
+                decoration: InputDecoration(labelText: 'Image Title'),
+                style: TextStyle(color: Colors.white),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a title';
+                  }
+                  return null;
+                },
               ),
-            SizedBox(height: 20),
-            MaterialButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  _uploadImage();
-                }
-              },
-              height: 50,
-              color: Colors.deepPurpleAccent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
+              TextFormField(
+                controller: _imageDescController,
+                decoration: InputDecoration(labelText: 'Image Description'),
+                style: TextStyle(color: Colors.white),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a description';
+                  }
+                  return null;
+                },
               ),
-              child: const Center(
-                child: Text(
-                  "Upload Image",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+              SizedBox(height: 20),
+              MaterialButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _uploadImage();
+                  }
+                },
+                height: 50,
+                color: Colors.deepPurpleAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: const Center(
+                  child: Text(
+                    "Upload Image",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
